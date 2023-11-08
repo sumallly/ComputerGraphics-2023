@@ -21,7 +21,6 @@ void reduce(double* num, double max, double min, double step);
 void trans();
 
 
-
 int viewportWidth, viewportHeight;
 double sphereCoord[] = { 5.0, 0.125 * M_PI, 0.25 * M_PI };
 double eye[] = { 0.0, 0.0, 0.0 };
@@ -41,8 +40,6 @@ int main(int argc, char** argv) {
 	glutMotionFunc(motion);
 	//glutIdleFunc(idle);
 	glutTimerFunc(1000 / fps, timer, 0);
-	glClearColor(1.0, 1.0, 1.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
 	glutMainLoop();
 	return 0;
 }
@@ -82,25 +79,6 @@ void timer(int value) {
 	glutTimerFunc(1000/fps, timer, 0);
 }
 
-void myAxis(void) {
-	glLineWidth(1.0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glBegin(GL_LINES);
-	//x?????`?? red
-	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(0.9, 0.0, 0.0);
-	//y?????`?? green
-	glColor3f(0.0, 1.0, 0.0);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(0.0, 0.9, 0.0);
-	//z?????`?? blue
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(0.0, 0.0, 0.9);
-	glEnd();
-}
-
 void keyboard(unsigned char key, int x, int y) {
 	switch ((unsigned char)key) {
 	case 'q':
@@ -108,7 +86,6 @@ void keyboard(unsigned char key, int x, int y) {
 	default:
 		break;
 	}
-
 }
 
 void special(int key, int x, int y) {
