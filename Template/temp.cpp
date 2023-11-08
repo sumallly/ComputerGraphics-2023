@@ -6,6 +6,7 @@
 #define M_PI 3.14159265358979
 #endif
 
+void init(void);
 void resize(int w, int h);
 void display(void);
 void idle(void);
@@ -30,6 +31,7 @@ double fps = 30.0;
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
+	glutInitWindowSize(600, 600);
 	glutCreateWindow("CG_Task00 T507 Ibuki Umehara");
 	glutReshapeFunc(resize);
 	glutDisplayFunc(display);
@@ -38,11 +40,25 @@ int main(int argc, char** argv) {
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
 	//glutIdleFunc(idle);
+
+	init();
+
 	glutTimerFunc(1000/fps, timer, 0);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glutMainLoop();
 	return 0;
+}
+
+void init(void)
+{
+	glClearColor(1.0, 1.0, 1.0, 1.0); // background color
+	glClear(GL_COLOR_BUFFER_BIT);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+	glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 }
 
 void resize(int w, int h) {
