@@ -20,6 +20,8 @@ void rotate(double dphi, double dtheta);
 void reduce(double* num, double max, double min, double step);
 void trans();
 
+
+
 int viewportWidth, viewportHeight;
 double sphereCoord[] = { 5.0, 0.125 * M_PI, 0.25 * M_PI };
 double eye[] = { 0.0, 0.0, 0.0 };
@@ -38,7 +40,7 @@ int main(int argc, char** argv) {
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
 	//glutIdleFunc(idle);
-	glutTimerFunc(1000/fps, timer, 0);
+	glutTimerFunc(1000 / fps, timer, 0);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glutMainLoop();
@@ -51,10 +53,10 @@ void resize(int w, int h) {
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	
-	// 1)§e // ěpĚ éĘíőwn
+
+	// 1)?��?????e // ?????p?????????????w?n
 	gluPerspective(10.0, (double)viewportWidth / (double)viewportHeight, 0.1, 200.0);
-	// 2)łËe // eZgbN
+	// 2)???????e // ?e???Z???g???b?N
 	//glOrtho(-1.0, 1.0, -1.0, 1.0, 3.0, 7.0);
 }
 
@@ -65,6 +67,7 @@ void display(void) {
 	trans();
 	gluLookAt(eye[0], eye[1], eye[2], lookat[0], lookat[1], lookat[2], head[0], head[1], head[2]);
 
+	glutWireTeapot(0.5);
 	myAxis();
 
 	glFlush();
@@ -83,15 +86,15 @@ void myAxis(void) {
 	glLineWidth(1.0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_LINES);
-	//x˛Ě`ć red
+	//x?????`?? red
 	glColor3f(1.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.9, 0.0, 0.0);
-	//y˛Ě`ć green
+	//y?????`?? green
 	glColor3f(0.0, 1.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.9, 0.0);
-	//z˛Ě`ć blue
+	//z?????`?? blue
 	glColor3f(0.0, 0.0, 1.0);
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.9);
@@ -126,7 +129,7 @@ void special(int key, int x, int y) {
 bool PUSHED = FALSE;
 int drag[] = { 0, 0 };
 void mouse(int button, int state, int x, int y) {
-	
+
 	drag[0] = x;
 	drag[1] = y;
 
@@ -178,19 +181,19 @@ void motion(int x, int y) {
 	int dx = x - drag[0],
 		dy = y - drag[1];
 	printf("(%4d, %4d), d(%3d, %3d) \n", x, y, dx, dy);
-	rotate((double)dy/120, (double)dx/120);
+	rotate((double)dy / 120, (double)dx / 120);
 	drag[0] = x;
 	drag[1] = y;
 }
 
 void rotate(double dphi, double dtheta) {
-    sphereCoord[1] += dphi;
-    reduce(&sphereCoord[1], M_PI/2, -M_PI/2, M_PI/180);
-    sphereCoord[2] += dtheta;
-    reduce(&sphereCoord[2], 2*M_PI, 0, 2*M_PI);
+	sphereCoord[1] += dphi;
+	reduce(&sphereCoord[1], M_PI / 2, -M_PI / 2, M_PI / 180);
+	sphereCoord[2] += dtheta;
+	reduce(&sphereCoord[2], 2 * M_PI, 0, 2 * M_PI);
 }
 
-void reduce(double *num, double max, double min, double step) {
+void reduce(double* num, double max, double min, double step) {
 	if (*num >= max)
 		while (*num >= max)
 			*num -= step;
