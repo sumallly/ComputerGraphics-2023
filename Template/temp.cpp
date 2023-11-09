@@ -69,9 +69,9 @@ void resize(int w, int h) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	
-	// 1)§e // ěpĚ éĘíőwn
+	// 1) perspective transformation
 	gluPerspective(10.0, (double)viewportWidth / (double)viewportHeight, 0.1, 200.0);
-	// 2)łËe // eZgbN
+	// 2) orthographic projection
 	//glOrtho(-1.0, 1.0, -1.0, 1.0, 3.0, 7.0);
 }
 
@@ -105,15 +105,15 @@ void myAxis(void) {
 	glLineWidth(1.0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_LINES);
-	//x˛Ě`ć red
+	//x-axis red
 	glColor3f(1.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.9, 0.0, 0.0);
-	//y˛Ě`ć green
+	//y-axis green
 	glColor3f(0.0, 1.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.9, 0.0);
-	//z˛Ě`ć blue
+	//z-axis blue
 	glColor3f(0.0, 0.0, 1.0);
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.9);
