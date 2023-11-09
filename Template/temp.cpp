@@ -82,12 +82,13 @@ void display(void) {
 	trans();
 	gluLookAt(eye[0], eye[1], eye[2], lookat[0], lookat[1], lookat[2], head[0], head[1], head[2]);
 
+
+	glDisable(GL_LIGHTING);
 	myAxis();
-
-	glColor3f(0.5, 0.5, 0.5);
 	glTranslatef(lookat[0], lookat[1], lookat[2]);
+	glColor3f(0.5, 0.5, 0.5);
 	glutSolidSphere(0.02, 16, 16);
-
+	glEnable(GL_LIGHTING);
 
 	glFlush();
 }
