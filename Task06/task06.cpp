@@ -110,12 +110,14 @@ void timer(int value)
 
 void keyboard(unsigned char key, int x, int y)
 {
-	switch ((unsigned char)key) {
+	switch ((unsigned char)key)
+	{
 	case 'q':
 		exit(0);
 	default:
 		break;
 	}
+	printf("%c, %d, %d \n", key, x, y);
 }
 
 void special(int key, int x, int y)
@@ -132,6 +134,7 @@ void special(int key, int x, int y)
 	default:
 		break;
 	}
+	printf("%c, %d, %d \n", key, x, y);
 }
 
 bool PUSHED = FALSE;
@@ -141,7 +144,8 @@ void mouse(int button, int state, int x, int y)
 	drag[0] = x;
 	drag[1] = y;
 
-	switch (button) {
+	switch (button)
+	{
 	case GLUT_LEFT_BUTTON:
 		break;
 	case GLUT_MIDDLE_BUTTON:
@@ -164,7 +168,8 @@ void mouse(int button, int state, int x, int y)
 		break;
 	}
 
-	switch (state) {
+	switch (state)
+	{
 	case 0:
 		printf("pushed\n");
 		PUSHED = TRUE;

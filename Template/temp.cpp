@@ -19,6 +19,7 @@ void myAxis(void);
 
 void rotate(double dphi, double dtheta);
 void reduce(double* num, double max, double min, double step);
+void move(double depth, double up, double side);
 void trans();
 
 int viewportWidth, viewportHeight;
@@ -83,6 +84,11 @@ void display(void) {
 
 	myAxis();
 
+	glColor3f(0.5, 0.5, 0.5);
+	glTranslatef(lookat[0], lookat[1], lookat[2]);
+	glutSolidSphere(0.02, 16, 16);
+
+
 	glFlush();
 }
 
@@ -115,13 +121,33 @@ void myAxis(void) {
 }
 
 void keyboard(unsigned char key, int x, int y) {
+	double depth = 0.0, up = 0.0, side = 0.0;
 	switch ((unsigned char)key) {
-	case 'q':
+	case 'w':
+		depth += 0.02;
+		break;
+	case 's':
+		depth -= 0.02;
+		break;
+	case 'a':
+		side -= 0.02;
+		break;
+	case 'd':
+		side += 0.02;
+		break;
+	case 'e': // space key
+		up += 0.02;
+		break;
+	case 'q': // left shift key
+		up -= 0.02;
+		break;
+	case 'o':
 		exit(0);
 	default:
 		break;
 	}
-
+	move(depth, up, side);
+	printf("lookat (%f, %f, %f)\n", lookat[0], lookat[1], lookat[2]);
 }
 
 void special(int key, int x, int y) {
@@ -206,13 +232,23 @@ void rotate(double dphi, double dtheta) {
     reduce(&sphereCoord[2], 2*M_PI, 0, 2*M_PI);
 }
 
-void reduce(double *num, double max, double min, double step) {
+void reduce(double* num, double max, double min, double step) {
 	if (*num >= max)
 		while (*num >= max)
 			*num -= step;
 	else if (*num < min)
 		while (*num < min)
 			*num += step;
+}
+
+void move(double depth, double up, double side) {
+	printf("move : %f %f %f\n", depth, up, side);
+	double r = sphereCoord[0],
+		phi = sphereCoord[1],
+		theta = sphereCoord[2];
+	lookat[0] -= depth * cos(theta) - side * sin(theta);
+	lookat[1] += up * cos(phi) - depth * sin(phi);
+	lookat[2] -= depth * sin(theta) + side * cos(theta);
 }
 
 void trans() {
@@ -222,7 +258,7 @@ void trans() {
 	double r = sphereCoord[0],
 		phi = sphereCoord[1],
 		theta = sphereCoord[2];
-	eye[0] = r * cos(phi) * cos(theta);  // x
-	eye[1] = r * sin(phi);               // y
-	eye[2] = r * cos(phi) * sin(theta);  // z
+	eye[0] = lookat[0] + r * cos(phi) * cos(theta);  // x
+	eye[1] = lookat[1] + r * sin(phi);               // y
+	eye[2] = lookat[2] + r * cos(phi) * sin(theta);  // z
 }
