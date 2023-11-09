@@ -117,7 +117,7 @@ void myAxis(void) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_LINES);
 	//x-axis red
-	//glColor3f(1.0, 0.0, 0.0);
+	glColor3f(1.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.9, 0.0, 0.0);
 	//y?-axis gree
