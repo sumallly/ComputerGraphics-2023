@@ -124,25 +124,25 @@ void myAxis(void) {
 void keyboard(unsigned char key, int x, int y) {
 	double depth = 0.0, up = 0.0, side = 0.0;
 	switch ((unsigned char)key) {
-	case 'w':
+	case 'w': // move to back
 		depth += 0.02;
 		break;
-	case 's':
+	case 's': // move to me
 		depth -= 0.02;
 		break;
-	case 'a':
+	case 'a': // move to left
 		side -= 0.02;
 		break;
-	case 'd':
+	case 'd': // move to right
 		side += 0.02;
 		break;
-	case 'e': // space key
+	case 'e': // move to y-plus
 		up += 0.02;
 		break;
-	case 'q': // left shift key
+	case 'q': // move to y-minus
 		up -= 0.02;
 		break;
-	case 'o':
+	case 'o': // exit out
 		exit(0);
 	default:
 		break;
@@ -226,6 +226,7 @@ void motion(int x, int y) {
 	drag[1] = y;
 }
 
+// Rotate camera position
 void rotate(double dphi, double dtheta) {
     sphereCoord[1] += dphi;
     reduce(&sphereCoord[1], M_PI/2, -M_PI/2, M_PI/180);
@@ -233,6 +234,7 @@ void rotate(double dphi, double dtheta) {
     reduce(&sphereCoord[2], 2*M_PI, 0, 2*M_PI);
 }
 
+// Cut to fit the max and min
 void reduce(double* num, double max, double min, double step) {
 	if (*num >= max)
 		while (*num >= max)
@@ -242,6 +244,7 @@ void reduce(double* num, double max, double min, double step) {
 			*num += step;
 }
 
+// Move viewpoint
 void move(double depth, double up, double side) {
 	printf("move : %f %f %f\n", depth, up, side);
 	double r = sphereCoord[0],
@@ -252,10 +255,11 @@ void move(double depth, double up, double side) {
 	lookat[2] -= depth * sin(theta) + side * cos(theta);
 }
 
+// Convert camera position from spherical coordinate to xyz
 void trans() {
-	// r	 : distance from origin
-	// phi	 : angle from xy-plane
-	// theta : angle from x-plus-axis on xy-plane
+	// r	 : distance from viewpoint to camera position
+	// phi	 : camera position angle from xz-plane
+	// theta : camera position angle from x-plus-axis on xz-plane
 	double r = sphereCoord[0],
 		phi = sphereCoord[1],
 		theta = sphereCoord[2];
