@@ -34,8 +34,7 @@ double head[] = { 0.0, 1.0, 0.0 };
 double fps = 10.0;
 
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitWindowSize(600, 600);
 	glutCreateWindow("CG_Task06 T507 Ibuki Umehara");
@@ -54,8 +53,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-void init(void)
-{
+void init(void) {
 	glClearColor(1.0, 1.0, 1.0, 1.0); // background color
 	glClear(GL_COLOR_BUFFER_BIT);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
@@ -65,8 +63,7 @@ void init(void)
 	glCullFace(GL_BACK);
 }
 
-void resize(int w, int h)
-{
+void resize(int w, int h) {
 	viewportWidth = w;
 	viewportHeight = h;
 	glViewport(0, 0, w, h);
@@ -79,8 +76,7 @@ void resize(int w, int h)
 	//glOrtho(-1.0, 1.0, -1.0, 1.0, 3.0, 7.0);
 }
 
-void display(void)
-{
+void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -97,19 +93,16 @@ void display(void)
 	glFlush();
 }
 
-void idle(void)
-{
+void idle(void) {
 	glutPostRedisplay();
 }
 
-void timer(int value)
-{
+void timer(int value) {
 	glutPostRedisplay();
 	glutTimerFunc(1000/fps, timer, 0);
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
+void keyboard(unsigned char key, int x, int y) {
 	switch ((unsigned char)key)
 	{
 	case 'q':
@@ -120,8 +113,7 @@ void keyboard(unsigned char key, int x, int y)
 	printf("%c, %d, %d \n", key, x, y);
 }
 
-void special(int key, int x, int y)
-{
+void special(int key, int x, int y) {
 	switch (key) {
 	case GLUT_KEY_RIGHT:
 		break;
@@ -139,13 +131,11 @@ void special(int key, int x, int y)
 
 bool PUSHED = FALSE;
 int drag[] = { 0, 0 };
-void mouse(int button, int state, int x, int y)
-{
+void mouse(int button, int state, int x, int y) {
 	drag[0] = x;
 	drag[1] = y;
 
-	switch (button)
-	{
+	switch (button)	{
 	case GLUT_LEFT_BUTTON:
 		break;
 	case GLUT_MIDDLE_BUTTON:
@@ -168,8 +158,7 @@ void mouse(int button, int state, int x, int y)
 		break;
 	}
 
-	switch (state)
-	{
+	switch (state) {
 	case 0:
 		printf("pushed\n");
 		PUSHED = TRUE;
@@ -190,8 +179,7 @@ void mouse(int button, int state, int x, int y)
 }
 
 double kx = 0.1, ky = 0.1;
-void motion(int x, int y)
-{
+void motion(int x, int y) {
 	int dx = x - drag[0],
 		dy = y - drag[1];
 	printf("(%4d, %4d), d(%3d, %3d) \n", x, y, dx, dy);
@@ -200,16 +188,14 @@ void motion(int x, int y)
 	drag[1] = y;
 }
 
-void rotate(double dphi, double dtheta)
-{
+void rotate(double dphi, double dtheta) {
 	sphereCoord[1] += dphi;
 	reduce(&sphereCoord[1], M_PI / 2, -M_PI / 2, M_PI / 180);
 	sphereCoord[2] += dtheta;
 	reduce(&sphereCoord[2], 2 * M_PI, 0, 2 * M_PI);
 }
 
-void reduce(double* num, double max, double min, double step)
-{
+void reduce(double* num, double max, double min, double step) {
 	if (*num >= max)
 		while (*num >= max)
 			*num -= step;
@@ -218,8 +204,7 @@ void reduce(double* num, double max, double min, double step)
 			*num += step;
 }
 
-void trans()
-{
+void trans() {
 	// r	 : distance from origin
 	// phi	 : angle from xy-plane
 	// theta : angle from x-plus-axis on xy-plane
@@ -231,8 +216,7 @@ void trans()
 	eye[2] = r * cos(phi) * sin(theta);  // z
 }
 
-void myAxis(void)
-{
+void myAxis(void) {
 	glLineWidth(1.0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_LINES);
@@ -253,8 +237,7 @@ void myAxis(void)
 	glFlush();
 }
 
-void myPolygon01(void)
-{
+void myPolygon01(void) {
 	glBegin(GL_TRIANGLES);
 	glColor3f(1.0, 1.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.2);
@@ -263,8 +246,7 @@ void myPolygon01(void)
 	glEnd();
 }
 
-void myPolygon02(void)
-{
+void myPolygon02(void) {
 	glBegin(GL_POLYGON);
 	glColor3f(0.0, 0.0, 1.0);
 	glVertex3f(0.0, 0.0, 0.0);
@@ -273,8 +255,7 @@ void myPolygon02(void)
 	glEnd();
 }
 
-void myPolygon03(void)
-{
+void myPolygon03(void) {
 	glBegin(GL_POLYGON);
 	glColor3f(0.0, 1.0, 0.0);
 	glVertex3f(0.0, 0.0, -0.2);
@@ -283,8 +264,7 @@ void myPolygon03(void)
 	glEnd();
 }
 
-void myPolygon04(void)
-{
+void myPolygon04(void) {
 	glBegin(GL_POLYGON);
 	glColor3f(1.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.0, -0.4);
