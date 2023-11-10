@@ -15,8 +15,8 @@ void keyboard(unsigned char key, int x, int y);
 void special(int key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void motion(int x, int y);
-void myAxis(void);
 
+void myAxisPlus(void);
 void rotate(double dphi, double dtheta);
 void reduce(double* num, double max, double min, double step);
 void move(double depth, double up, double side);
@@ -82,13 +82,7 @@ void display(void) {
 	trans();
 	gluLookAt(eye[0], eye[1], eye[2], lookat[0], lookat[1], lookat[2], head[0], head[1], head[2]);
 
-
-	glDisable(GL_LIGHTING);
-	myAxis();
-	glTranslatef(lookat[0], lookat[1], lookat[2]);
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidSphere(0.02, 16, 16);
-	glEnable(GL_LIGHTING);
+	myAxisPlus();
 
 	glFlush();
 }
@@ -102,7 +96,13 @@ void timer(int value) {
 	glutTimerFunc(1000/fps, timer, 0);
 }
 
-void myAxis(void) {
+void myAxisPlus(void) {
+	bool isEnabledLIGHTING = false;
+	if (glIsEnabled(GL_LIGHTING)) {
+		isEnabledLIGHTING = true;
+		glDisable(GL_LIGHTING);
+	}
+
 	glLineWidth(1.0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_LINES);
@@ -119,6 +119,14 @@ void myAxis(void) {
 	glVertex3f(0.0, 0.0, 0.0);
 	glVertex3f(0.0, 0.0, 0.9);
 	glEnd();
+
+	// ViewPoint Sphere
+	glTranslatef(lookat[0], lookat[1], lookat[2]);
+	glColor3f(0.5, 0.5, 0.5);
+	glutSolidSphere(0.02, 16, 16);
+
+	if (isEnabledLIGHTING)
+		glEnable(GL_LIGHTING);
 }
 
 void keyboard(unsigned char key, int x, int y) {
