@@ -124,13 +124,13 @@ void myAxisPlus(void) {
 	glVertex3f(0.0, 0.0, 0.9);
 	glEnd();
 
-	// ViewPoint Sphere
-	glTranslatef(lookat[0], lookat[1], lookat[2]);
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidSphere(0.02, 16, 16);
-
 	if (isEnabledLIGHTING)
 		glEnable(GL_LIGHTING);
+
+	// ViewPoint Sphere
+	glTranslatef(lookat[0], lookat[1], lookat[2]);
+	glutSolidSphere(0.02, 16, 16);
+
 }
 
 void keyboard(unsigned char key, int x, int y) {
