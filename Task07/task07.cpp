@@ -95,6 +95,7 @@ void display(void) {
 
 	glDisable(GL_LIGHTING);
 	myAxis();
+	glEnable(GL_LIGHTING);
 	glTranslatef(lookat[0], lookat[1], lookat[2]);
 	glColor3f(0.5, 0.5, 0.5);
 	glutSolidSphere(0.02, 16, 16);
