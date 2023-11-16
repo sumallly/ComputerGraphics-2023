@@ -22,6 +22,8 @@ void reduce(double* num, double max, double min, double step);
 void move(double depth, double up, double side);
 void trans();
 
+void light01(void);
+
 int viewportWidth, viewportHeight;
 double sphereCoord[] = { 5.0, 0.125 * M_PI, 0.25 * M_PI };
 double eye[] = { 0.0, 0.0, 0.0 };
@@ -60,6 +62,8 @@ void init(void)
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+
+	light01();
 }
 
 void resize(int w, int h) {
@@ -274,4 +278,19 @@ void trans() {
 	eye[0] = lookat[0] + r * cos(phi) * cos(theta);  // x
 	eye[1] = lookat[1] + r * sin(phi);               // y
 	eye[2] = lookat[2] + r * cos(phi) * sin(theta);  // z
+}
+
+void light01(void) {
+	// light source
+	GLfloat light0_pos[] = { 5.0, -2.0, 10.0, 1.0 }; /* 光源位置 */
+	GLfloat light0_amb[] = { 0.1, 0.1, 0.1, 0.0 }; /* 環境光の強さ,色 */
+	GLfloat light0_dif[] = { 1.0, 1.0, 1.0, 0.0 }; /* 拡散光の強さ,色 */
+	GLfloat light0_spc[] = { 0.8, 0.8, 0.8, 0.0 }; /* 鏡面反射光の強さ,色 */
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light0_amb);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spc);
+	//glShadeModel(GL_FLAT); // GL_FLAT or GL_SMOOTH
+	glEnable(GL_LIGHTING); //反射物体のための光源発光
+	glEnable(GL_LIGHT0);
 }
