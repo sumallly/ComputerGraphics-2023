@@ -293,7 +293,7 @@ void light01(void) {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light0_amb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spc);
-	//glShadeModel(GL_FLAT); // GL_FLAT or GL_SMOOTH
+	glShadeModel(GL_FLAT); // GL_FLAT or GL_SMOOTH
 	glEnable(GL_LIGHTING); //反射物体のための光源発光
 	glEnable(GL_LIGHT0);
 }
@@ -302,7 +302,7 @@ void teapot01(void) {
 	glPushMatrix();
 
 	GLfloat m3_amb[] = { 0.24725, 0.19950, 0.07450, 1.0 };
-	GLfloat m3_dif[] = { 0.95164, 0.90648, 0.62648, 1.0 };
+	GLfloat m3_dif[] = { 0.75164, 0.60648, 0.22648, 1.0 };
 	GLfloat m3_spc[] = { 0.8, 0.8, 0.8, 1.0 };
 	GLfloat m3_shi[] = { 80.2 };
 
