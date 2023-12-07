@@ -36,7 +36,7 @@ double fps = 30.0;
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitWindowSize(600, 600);
-	glutCreateWindow("CG_Task00 T507 Ibuki Umehara");
+	glutCreateWindow("CG_Task08 T507 Ibuki Umehara");
 	glutReshapeFunc(resize);
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
