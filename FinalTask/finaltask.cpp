@@ -1,3 +1,9 @@
+// OpenGL_Task02.cpp
+// 2024/01/05
+// FinalTask
+// T507
+// Ibuki Umehara
+
 #include <iostream>
 #include <math.h>
 #include <GL/glut.h>
