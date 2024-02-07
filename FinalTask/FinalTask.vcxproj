@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="finaltask.cpp" />
+    <ClCompile Include="CG5507.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

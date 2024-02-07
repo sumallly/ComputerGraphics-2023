@@ -1,7 +1,7 @@
-// finaltask.cpp
+// CG5507.cpp
 // 2024/02/07
-// FinalTask
-// T507
+// 2023”N“xCGu‹`‘‡‰Û‘è
+// 5507
 // Ibuki Umehara
 
 #include <iostream>
