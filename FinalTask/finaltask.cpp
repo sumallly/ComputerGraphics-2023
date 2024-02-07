@@ -1,5 +1,5 @@
-// OpenGL_Task02.cpp
-// 2024/01/05
+// finaltask.cpp
+// 2024/02/07
 // FinalTask
 // T507
 // Ibuki Umehara
